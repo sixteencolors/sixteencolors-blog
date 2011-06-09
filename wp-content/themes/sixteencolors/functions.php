@@ -1,3 +1,5 @@
+<?php
+
 if ( ! function_exists( 'posted_on' ) ) :
 function posted_on() {
 	printf( '<span class="%1$s">Posted on</span> %2$s <span class="meta-sep">by</span> %3$s',
@@ -15,3 +17,5 @@ function posted_on() {
 	);
 }
 endif;
+
+?>
