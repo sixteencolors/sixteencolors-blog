@@ -24,9 +24,10 @@
     </title>
     <meta name="description" content="Sixteen Colors is an archive of ANSI art and ASCII art produced by groups in the underground digital artscene from 1990 to the present. This art began as a way to make Bulletin Board Systems more attractive but grew to be an art medium in its own right." />
     <meta name="keywords" content="ANSI, ASCII, art, underground, textmode, bbs" />
-    <link rel=stylesheet type=text/css href=http://sixteencolors.net/static/css/reset.css /> 
-    <link rel=stylesheet type=text/css href=http://sixteencolors.net/static/css/960.css />
-    <link rel=stylesheet type=text/css href=http://sixteencolors.net/static/css/16c.css />
+<!-- TODO: remove "blog." from href -->
+    <link rel=stylesheet type=text/css href=http://blog.sixteencolors.net/static/css/reset.css /> 
+    <link rel=stylesheet type=text/css href=http://blog.sixteencolors.net/static/css/960.css />
+    <link rel=stylesheet type=text/css href=http://blog.sixteencolors.net/static/css/16c.css />
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
