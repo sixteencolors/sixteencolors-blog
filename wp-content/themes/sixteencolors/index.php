@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 <section class=container>
-    <div class=grid_9>
+    <div class=grid_9 id=blog>
 <?php get_template_part( 'loop', 'index' ); ?>
     </div>
     <div class=grid_3 id=sidebar>
