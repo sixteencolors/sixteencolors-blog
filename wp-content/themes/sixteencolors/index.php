@@ -3,7 +3,7 @@
     <div class=grid_9>
 <?php get_template_part( 'loop', 'index' ); ?>
     </div>
-    <div class=grid_9>
+    <div class=grid_3>
 <?php get_sidebar(); ?>
     </div>
     <div class=clear></div>
