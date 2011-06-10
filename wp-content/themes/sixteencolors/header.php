@@ -79,8 +79,8 @@
         </nav>
         <div id=search class=grid_5>
             <h2>Search</h2>
-            <form>
-                <input type=search action="http://sixteencolors.net/search" name=q placeholder="Search the archive..." required /> 
+            <form action="http://sixteencolors.net/search">
+                <input type=search name=q placeholder="Search the archive..." required /> 
                 <input type=submit value=Search />
             </form>
         </div>
