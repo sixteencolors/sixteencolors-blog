@@ -5,17 +5,21 @@
 				<?php get_search_form(); ?>
 			</div>
 
-			<h2 class=style_1>Archives<span></span></h2>
-			<ul>
-				<?php wp_get_archives( 'type=monthly&show_post_count=1' ); ?>
-			</ul>
+            <div id="blog-archive">
+			    <h2 class=style_1>Archives<span></span></h2>
+			    <ul>
+				    <?php wp_get_archives( 'type=monthly&show_post_count=1' ); ?>
+			    </ul>
+            </div>
 
-			<h2 class=style_1>Meta<span></span></h2>
-			<ul>
-				<?php wp_register(); ?>
-				<li><?php wp_loginout(); ?></li>
-				<?php wp_meta(); ?>
-			</ul>
+            <div id="blog-meta">
+			    <h2 class=style_1>Meta<span></span></h2>
+			    <ul>
+				    <?php wp_register(); ?>
+				    <li><?php wp_loginout(); ?></li>
+				    <?php wp_meta(); ?>
+			    </ul>
+            </div>
 
 <?php endif; ?>
 	</div>
