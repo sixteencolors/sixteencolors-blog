@@ -2,6 +2,10 @@
 
 /* Disable smart quotes */
 remove_filter('the_content', 'wptexturize');
+remove_filter('the_excerpt', 'wptexturize');
+remove_filter('comment_text', 'wptexturize');
+remove_filter('the_title', 'wptexturize');
+remove_filter('comments_popup_link', 'wptexturize');
 
 if ( ! function_exists( 'posted_on' ) ) :
 function posted_on() {
