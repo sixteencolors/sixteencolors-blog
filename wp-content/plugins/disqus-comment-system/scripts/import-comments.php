@@ -26,13 +26,15 @@ if (in_array('--reset', $argv)) {
 } else {
     $last_comment_id = get_option('disqus_last_comment_id');
 }
+$force = (in_array('--force', $argv));
 $total = 0;
 $global_start = microtime();
 
+$memory_usage = memory_get_peak_usage();
 while ($imported) {
     print_line('  Importing chunk starting at comment id %d', $last_comment_id);
     $start = microtime();
-    $result = dsq_sync_forum($last_comment_id);
+    $result = dsq_sync_forum($last_comment_id, $force);
     if ($result === false) {
         print_line('---------------------------------------------------------');
         print_line('There was an error communicating with DISQUS!');
@@ -45,7 +47,14 @@ while ($imported) {
     }
     $total += $imported;
     $time = abs(microtime() - $start);
-    print_line('    %d comments imported (took %.2fs)', $imported, $time);
+
+    // assuming the cache is the internal, reset it's value to empty to avoid
+    // large memory consump
+    $wp_object_cache->cache = array();
+
+    $new_memory_usage = memory_get_peak_usage();
+    print_line('    %d comments imported (took %.2fs, memory increased by %db)', $imported, $time, ($new_memory_usage - $memory_usage));
+    $memory_usage = $new_memory_usage;
 }
 $total_time = abs(microtime() - $global_start);
 print_line('---------------------------------------------------------');

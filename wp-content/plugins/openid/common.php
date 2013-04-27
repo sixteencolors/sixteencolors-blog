@@ -223,7 +223,7 @@ function openid_generate_new_username($url, $append = true) {
 	$i='';
 	while(true) {
 		$username = openid_normalize_username( $base . $i );
-		$user = get_userdatabylogin($username);
+		$user = get_user_by('login', $username);
 		if ( $user ) {
 			if (!$append) return null;
 			$i++;
@@ -422,9 +422,7 @@ function openid_get_user_data($identity_url) {
  * @see get_user_data
  */
 function openid_get_user_data_ax($data, $identity_url) {
-	set_include_path( dirname(__FILE__) . PATH_SEPARATOR . get_include_path() );
 	require_once('Auth/OpenID/AX.php');
-	restore_include_path();
 
 	$response = openid_response();
 	$ax = Auth_OpenID_AX_FetchResponse::fromSuccessResponse($response);
@@ -463,7 +461,7 @@ function openid_get_user_data_ax($data, $identity_url) {
  * @see get_user_data
  */
 function openid_get_user_data_sreg($data, $identity_url) {
-	require_once(dirname(__FILE__) . '/Auth/OpenID/SReg.php');
+	require_once('Auth/OpenID/SReg.php');
 	$response = openid_response();
 	$sreg_resp = Auth_OpenID_SRegResponse::fromSuccessResponse($response);
 	$sreg = $sreg_resp->contents();
@@ -540,7 +538,7 @@ function openid_parse_request($wp) {
 			case 'ajax':
 				if ( check_admin_referer('openid_ajax') ) {
 					header('Content-Type: application/json');
-					echo '{ valid:' . ( is_url_openid( $_REQUEST['url'] ) ? 'true' : 'false' ) . ', nonce:"' . wp_create_nonce('openid_ajax') . '" }';
+					echo '{ "valid":' . ( is_url_openid( $_REQUEST['url'] ) ? 'true' : 'false' ) . ', "nonce":"' . wp_create_nonce('openid_ajax') . '" }';
 					exit;
 				}
 		}

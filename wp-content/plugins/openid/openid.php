@@ -5,7 +5,7 @@
  Description: Allows the use of OpenID for account registration, authentication, and commenting.  Also includes an OpenID provider which can turn WordPress author URLs into OpenIDs.
  Author: DiSo Development Team
  Author URI: http://diso-project.org/
- Version: 3.3.3
+ Version: 3.3.4
  License: Dual GPL (http://www.fsf.org/licensing/licenses/info/GPLv2.html) and Modified BSD (http://www.fsf.org/licensing/licenses/index_html#ModifiedBSD)
  Text Domain: openid
  */
@@ -16,8 +16,7 @@ define ( 'OPENID_PLUGIN_REVISION', preg_replace( '/\$Rev: (.+) \$/', '\\1',
 // last plugin revision that required database schema changes
 define ( 'OPENID_DB_REVISION', 24426);
 
-
-$openid_include_path = dirname(__FILE__);
+$openid_include_path = dirname(__FILE__) . '/lib';
 
 // check source of randomness
 if ( !@is_readable('/dev/urandom') ) { 
@@ -25,14 +24,14 @@ if ( !@is_readable('/dev/urandom') ) {
 }
 
 set_include_path( $openid_include_path . PATH_SEPARATOR . get_include_path() );
-require_once 'common.php';
-require_once 'consumer.php';
-require_once 'admin_panels.php';
-require_once 'comments.php';
-require_once 'login.php';
-require_once 'server.php';
-require_once 'store.php';
-restore_include_path();
+
+require_once dirname(__FILE__) . '/common.php';
+require_once dirname(__FILE__) . '/consumer.php';
+require_once dirname(__FILE__) . '/admin_panels.php';
+require_once dirname(__FILE__) . '/comments.php';
+require_once dirname(__FILE__) . '/login.php';
+require_once dirname(__FILE__) . '/server.php';
+require_once dirname(__FILE__) . '/store.php';
 
 // register activation (and similar) hooks
 register_activation_hook('openid/openid.php', 'openid_activate_plugin');
@@ -150,9 +149,9 @@ function get_userdata_by_various($id_or_name = null) {
 		if ($user == null) return false;
 		return $user->data;
 	} else if ( is_numeric($id_or_name) ) {
-		return get_userdata($id_or_name);
+		return get_user_by('id', $id_or_name);
 	} else {
-		return get_userdatabylogin($id_or_name);
+		return get_user_by('login', $id_or_name);
 	}
 }
 endif;
